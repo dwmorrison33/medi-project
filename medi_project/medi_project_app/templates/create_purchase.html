@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+  {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}"><strong>{{ message }}</strong></div>
+  {% endfor %}
+
+	<form class="form-horizontal" role="form" action="{% url 'create-purchase' product.id %}" method="POST">{% csrf_token %}
+  <div class="row">
+		<div class="col-md-12 ">
+			<div class="panel panel-info">
+				<div class="panel-heading">Purchase Item: {{ product.name }}</div>
+				<h3 style="margin-left: 15px;">Please Fill out your info to complete purchase</h3>
+
+        	<div class="panel-body">
+        		<div class="row">
+
+        			<div class="form-group">
+        				<label class="control-label col-xs-5">Name *</label>
+                  <div class="col-xs-4">
+                      <input type="text" maxlength="254" class="form-control input-md" name="name" id="id_name" required>
+                  </div>
+              </div>
+
+        			<div class="form-group">
+        				<label class="control-label col-xs-5">Email *</label>
+                  <div class="col-xs-4">
+                      <input type="email" maxlength="254" class="form-control input-md" name="email" id="id_email" required>
+                  </div>
+              </div>
+
+        			<div class="form-group">
+        				<label class="control-label col-xs-5">Address *</label>
+                  <div class="col-xs-4">
+                      <input type="text" maxlength="254" class="form-control input-md" name="address" id="id_address" required>
+                  </div>
+              </div>
+
+        			<div class="form-group">
+        				<label class="control-label col-xs-5">Phone *</label>
+                  <div class="col-xs-4">
+                      <input type="tel" pattern="^\d{3}-\d{3}-\d{4}$" class="form-control input-sm" name="phone" id="id_phone" placeholder="format: xxx-xxx-xxxx"required>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+		<button type="submit" class="btn btn-success btn-lg">Complete Purchase</button>
+		</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+  {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}"><strong>{{ message }}</strong></div>
+  {% endfor %}
+
+  <a class="btn btn-primary btn-lg" href="{% url 'list-of-products' %}" role="button">Home</a>
+{% endblock %}

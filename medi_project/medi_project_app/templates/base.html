@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Medi Project</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.jpeg' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="navbar-inverse" style="background-color: #2cafa4;">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'list-of-products' %}"><img src="{% static 'img/favicon.jpeg' %}" height="23"></a>
+          </div>
+          <form class="navbar-form navbar-left" role="search" method="GET" action="/search/">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" name="name" class="form-control" placeholder="Search Products">
+                <span class="input-group-btn">
+                  <button class="btn btn-sucess">Search</button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="category">
+        <div class="container">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="body">
+      <div class="container">
+        {% block page %}
+        {% endblock %}
+      </div>
+    </div>
+    
+    <footer id="footer">
+      <div class="container">
+        <span>Medi Project App<sup>&copy;</sup> 2018</span>
+      </div>
+    </footer>   
+  </body>
+</html>

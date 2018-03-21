@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <h2>Purchase</h2>
+    </div>
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>{{ product.name }}</h3>
+          <hr/>
+          <img src="/media/{{ product.photo }}" class="img-repsonsive center-block">
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Product Details</h4>
+        </div>
+        <div class="panel-body">
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            {% if product.inventory_on_hand > 0%}
+            <form method="GET" action="{% url 'create-purchase' product.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success btn-block">Pay Now ${{ product.cost }}</button>
+            </form>
+
+            {% else %}
+            We are sorry, but this item is temporarily out of stock.
+            {% endif %}
+        </div>
+      </div>      
+    </div>
+
+  </div>
+
+{% endblock %}
