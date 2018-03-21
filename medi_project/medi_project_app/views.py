@@ -5,6 +5,8 @@ from django.conf import settings
 from .models import Product, CustomerPurchase
 from .forms import CustomerForm
 
+import random, string
+
 def products(request):
     products = Product.objects.all()
     context = {
@@ -24,9 +26,16 @@ def create_purchase(request, id):
 	form = CustomerForm(request.POST or None)
 	if request.method == 'POST':
 		if form.is_valid():
+			# random confirmation_code
+			confirmation_code = ''.join(
+				[random.choice(string.ascii_letters + string.digits)
+				for x in range(6)
+				]
+			)
 			purchase_form = form.save(commit=False)
 			purchase_form.product_price = product.cost
 			purchase_form.product_name = product.name
+			purchase_form.confirmation_code = confirmation_code
 			purchase_form.save()
 			#update the inventory for item purchased
 			product.inventory_on_hand = product.inventory_on_hand - 1

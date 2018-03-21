@@ -21,7 +21,7 @@ class Product(models.Model):
 class CustomerPurchase(models.Model):
     product_name = models.CharField(max_length=254)
     product_price = models.IntegerField()
-    confirmation_code = models.UUIDField(default=uuid.uuid4, editable=False)
+    confirmation_code = models.CharField(max_length=254)
     name = models.CharField(max_length=254)
     email = models.EmailField()
     address = models.CharField(max_length=254)
